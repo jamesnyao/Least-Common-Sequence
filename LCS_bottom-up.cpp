@@ -1,22 +1,16 @@
 /** 
  *	Program 1 : LCS bottom-up
 **/
-
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "Functions.h"
 
 using namespace std;
 
 void lcs(string str_i, int length_i, string str_j, int length_j, int **c, char **d, ofstream *output_f)
 {
-	int i, j, start, end, millisec;
+	int i, j, start, end;
 	
 	// Records system clock ticks
 	start = clock();
-int //Now check what amount of ticks we have now. 
-//To get the time, just subtract start from end, and divide by CLOCKS_PER_SEC.
-std::cout << "it took " << end - start << "ticks, or " << ((float)end - start)/CLOCKS_PER_SEC << "seconds." << std::endl;
 	
 	for (i = 1; i < length_i + 1; i++)
 	{
@@ -45,19 +39,16 @@ std::cout << "it took " << end - start << "ticks, or " << ((float)end - start)/C
 	
 	// Records system clock ticks again
 	end = clock();
-	millisec = (end - start) / (CLOCKS_PER_SEC / 1000)
-	
 	
 	// Matrix to file
 	if (length_i <= 10 && length_j <= 10)
 	{
-		for (i = 0; i < length_i + 1; i++)
-		{
-			for (j = 0; j < length_j + 1; j++)
-			{
-				cout << c[i][j] << ',' << d[i][j] << '\t';
-			}
-			cout << endl;
-		}
+		matrix_to_file(cout, length_i, length_j, c, d);
 	}
+    
+    // Longest common subsequence to file
+    lcs_to_file(cout, str_i, length_i, str_j, length_j, c, d);
+    
+    // Running time to file
+    running_time_to_file(cout, start, end);
 }
